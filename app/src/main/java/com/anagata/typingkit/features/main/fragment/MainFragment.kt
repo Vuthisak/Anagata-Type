@@ -19,6 +19,13 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         binding = FragmentMainBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
         setupContent()
+        registerListener()
+    }
+
+    private fun registerListener() {
+        binding.refreshButton.setOnClickListener {
+            showToast("Hello, it is refresh.")
+        }
     }
 
     private fun showChooseFontSizeDialog() {

@@ -2,9 +2,11 @@ package com.anagata.typingkit.features.detail.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.anagata.typingkit.R
 import com.anagata.typingkit.base.BaseFragment
 import com.anagata.typingkit.databinding.FragmentDetailBinding
+import com.anagata.typingkit.features.detail.adapter.DetailAdapter
 
 class DetailFragment : BaseFragment(R.layout.fragment_detail) {
 
@@ -13,6 +15,14 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentDetailBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
+        setupContent()
+    }
+
+    private fun setupContent() {
+        binding.detailRecycler.run {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = DetailAdapter(arrayListOf())
+        }
     }
 
 }

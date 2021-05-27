@@ -12,7 +12,6 @@ class DetailAdapter(
 ) : BaseRecyclerAdapter<Font, DetailAdapter.DetailViewHolder>(items) {
 
     override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {
-        super.onBindViewHolder(holder, position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
@@ -23,6 +22,8 @@ class DetailAdapter(
         )
         return DetailViewHolder(binding)
     }
+
+    override fun getItemCount(): Int = 6
 
     class DetailViewHolder(
         private val binding: ViewItemPreviewFontBinding
