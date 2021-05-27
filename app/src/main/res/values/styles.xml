@@ -10,8 +10,11 @@
 
     <style name="ToolbarTitle" parent="Widget.AppCompat.TextView">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">@dimen/size_28sp</item>
+    </style>
+
+    <style name="ToolbarTitle.TextColorWhite">
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="ToolbarSubTitle" parent="Widget.AppCompat.TextView">
@@ -20,6 +23,7 @@
     </style>
 
     <style name="ToolbarTitle.ToolbarChooseStyle">
+        <item name="android:textColor">@android:color/white</item>
         <item name="background">?android:selectableItemBackground</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
