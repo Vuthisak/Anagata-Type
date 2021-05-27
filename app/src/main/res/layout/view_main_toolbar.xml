@@ -32,11 +32,13 @@
         android:text="Niradei Bold 36pt" />
 
     <TextView
-        style="@style/ToolbarTitle"
+        android:id="@+id/styleText"
+        style="@style/ToolbarTitle.ToolbarChooseStyle"
         android:layout_width="@dimen/space_70dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/space_24dp"
-        android:background="@drawable/whie_circle_background"
+        android:background="@drawable/white_border_circle"
+        android:focusable="true"
         android:gravity="center"
         android:padding="@dimen/space_16dp"
         android:text="@string/A_a"

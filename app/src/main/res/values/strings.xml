@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">AnagataType</string>
+    <string name="refresh">Refresh</string>
     <string name="A_a">Aa</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="apply">Apply</string>
+    <string name="choose_font_and_size">Choose Font &amp; Size</string>
+    <string name="mock_data">ក ខ គ ឃ ង ច ឆ ជ ឈ ញ ដ ឋ ឌ ឍ ណ ត ថ ទ ធ ន ប ផ ព ភ ម យ រ ល វ ឝ ឞ ស ហ ឡ អ ឥ ឦ ឧ ឨ ឩ ឪ ឫ ឬ ឭ ឮ ឯ ឰ ឱ ឲ ឳ \n០ ១ ២ ៣ ៤ ៥ ៦ ៧ ៨ ៩ ៛ ។ ៕ ៖ ៗ ។ល។</string>
+    <string-array name="items">
+        <item>Item 1</item>
+        <item>Item 2</item>
+        <item>Item 3</item>
+        <item>Item 4</item>
+        <item>Item 5¬</item>
+    </string-array>
 </resources>
