@@ -1,4 +1,4 @@
-package com.anagata.typingkit.features.ui.dialog
+package com.anagata.typingkit.features.dialog
 
 import android.app.Dialog
 import android.os.Bundle
@@ -10,7 +10,6 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.Window
 import androidx.fragment.app.DialogFragment
 import com.anagata.typingkit.databinding.DialogSelectionFontSizeBinding
-
 
 class SelectionFontSizeDialog : DialogFragment() {
 

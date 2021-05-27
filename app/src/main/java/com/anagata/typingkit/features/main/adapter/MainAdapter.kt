@@ -1,4 +1,4 @@
-package com.anagata.typingkit.features.ui.main.adapter
+package com.anagata.typingkit.features.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -4,16 +4,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.anagata.typingkit.features.ui.detail.activity.DetailActivity"
+            android:name="com.anagata.typingkit.features.detail.activity.DetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anagata.typingkit.features.ui.main.activity.MainActivity"
+            android:name="com.anagata.typingkit.features.main.activity.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

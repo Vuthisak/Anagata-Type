@@ -1,4 +1,4 @@
-package com.anagata.typingkit.features.ui.detail.fragment
+package com.anagata.typingkit.features.detail.fragment
 
 import android.os.Bundle
 import android.view.View
