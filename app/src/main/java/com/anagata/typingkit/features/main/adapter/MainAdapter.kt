@@ -24,7 +24,7 @@ class MainAdapter(
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.binding.run {
-            root.setOnClickListener {
+            contentContainer.setOnClickListener {
                 onItemClickListener(Font("Test", 1, "Test"))
             }
         }
