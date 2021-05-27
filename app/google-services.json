@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "949248983345",
+    "firebase_url": "https://anagata-font-testing-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "anagata-font-testing",
+    "storage_bucket": "anagata-font-testing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949248983345:android:cd9276f98b8fa590087010",
+        "android_client_info": {
+          "package_name": "com.anagata.typingkit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949248983345-95lrulhfu57j5ph91pgsluhlikd1jm6d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLcLz8JLNXbuIC7LGZ0TCxYsM6fjORMUE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949248983345-95lrulhfu57j5ph91pgsluhlikd1jm6d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

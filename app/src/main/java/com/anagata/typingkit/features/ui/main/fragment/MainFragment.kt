@@ -1,27 +1,19 @@
-package com.anagatatype.app.features.ui.main
+package com.anagata.typingkit.features.ui.main.fragment
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.anagatatype.app.R
-import com.anagatatype.app.base.BaseFragment
-import com.anagatatype.app.databinding.FragmentMainBinding
-import com.anagatatype.app.features.ui.dialog.SelectionFontSizeDialog
+import com.anagata.typingkit.R
+import com.anagata.typingkit.base.BaseFragment
+import com.anagata.typingkit.databinding.FragmentMainBinding
+import com.anagata.typingkit.features.ui.detail.DetailActivity
+import com.anagata.typingkit.features.ui.dialog.SelectionFontSizeDialog
+import com.anagata.typingkit.features.ui.main.adapter.MainAdapter
 
-class MainFragment : BaseFragment() {
+class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private lateinit var binding: FragmentMainBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentMainBinding.bind(view)
@@ -41,7 +33,16 @@ class MainFragment : BaseFragment() {
     private fun setupRecyclerView() {
         binding.mainRecycler.run {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = MainAdapter()
+            adapter = MainAdapter {
+                openDetailActivity()
+            }
+        }
+    }
+
+    private fun openDetailActivity() {
+        requireContext().run {
+            val intent = Intent(this, DetailActivity::class.java)
+            startActivity(intent)
         }
     }
 

@@ -1,8 +1,6 @@
-package com.anagatatype.app.features.ui.dialog
+package com.anagata.typingkit.features.ui.dialog
 
 import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +9,7 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.Window
 import androidx.fragment.app.DialogFragment
-import com.anagatatype.app.databinding.DialogSelectionFontSizeBinding
+import com.anagata.typingkit.databinding.DialogSelectionFontSizeBinding
 
 
 class SelectionFontSizeDialog : DialogFragment() {

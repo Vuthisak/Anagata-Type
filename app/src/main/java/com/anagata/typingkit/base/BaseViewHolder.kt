@@ -1,4 +1,4 @@
-package com.anagatatype.app.base
+package com.anagata.typingkit.base
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding

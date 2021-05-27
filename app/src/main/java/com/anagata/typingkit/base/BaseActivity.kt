@@ -1,4 +1,4 @@
-package com.anagatatype.app.base
+package com.anagata.typingkit.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

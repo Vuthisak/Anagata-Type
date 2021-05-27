@@ -1,4 +1,4 @@
-package com.anagatatype.app
+package com.anagata.typingkit
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

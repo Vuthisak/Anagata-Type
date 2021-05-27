@@ -1,4 +1,4 @@
-package com.anagatatype.app.repository.model
+package com.anagata.typingkit.repository.model
 
 data class Font(
     val title: String?,

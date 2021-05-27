@@ -1,13 +1,15 @@
-package com.anagatatype.app.features.ui.main
+package com.anagata.typingkit.features.ui.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.anagatatype.app.base.BaseViewHolder
-import com.anagatatype.app.databinding.ViewItemFontBinding
-import com.anagatatype.app.repository.model.Font
+import com.anagata.typingkit.base.BaseViewHolder
+import com.anagata.typingkit.databinding.ViewItemFontBinding
+import com.anagata.typingkit.repository.model.Font
 
-class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+class MainAdapter(
+    private val onItemClickListener: (font: Font) -> Unit
+) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     private val items = arrayListOf<Font>()
 
@@ -21,6 +23,11 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+        holder.binding.run {
+            root.setOnClickListener {
+                onItemClickListener(Font("Test", 1, "Test"))
+            }
+        }
     }
 
     override fun getItemCount(): Int = 10
@@ -37,7 +44,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     }
 
     class MainViewHolder(
-        private val binding: ViewItemFontBinding
+        val binding: ViewItemFontBinding
     ) : BaseViewHolder(binding)
 
 }

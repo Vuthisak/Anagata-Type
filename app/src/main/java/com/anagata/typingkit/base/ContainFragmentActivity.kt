@@ -1,10 +1,10 @@
-package com.anagatatype.app.base
+package com.anagata.typingkit.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.anagatatype.app.R
-import com.anagatatype.app.databinding.ActivityContainerFragmentBinding
+import com.anagata.typingkit.R
+import com.anagata.typingkit.databinding.ActivityContainerFragmentBinding
 
 abstract class ContainFragmentActivity : AppCompatActivity() {
 

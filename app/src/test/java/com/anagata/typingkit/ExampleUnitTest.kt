@@ -1,4 +1,4 @@
-package com.anagatatype.app
+package com.anagata.typingkit
 
 import org.junit.Test
 
