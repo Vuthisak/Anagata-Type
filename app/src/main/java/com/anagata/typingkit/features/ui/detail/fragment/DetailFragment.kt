@@ -1,20 +1,18 @@
 package com.anagata.typingkit.features.ui.detail.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.anagata.typingkit.R
+import com.anagata.typingkit.base.BaseFragment
+import com.anagata.typingkit.databinding.FragmentDetailBinding
 
-class DetailFragment : Fragment() {
+class DetailFragment : BaseFragment(R.layout.fragment_detail) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail, container, false)
+    private lateinit var binding: FragmentDetailBinding
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding = FragmentDetailBinding.bind(view)
+        super.onViewCreated(view, savedInstanceState)
     }
 
 }

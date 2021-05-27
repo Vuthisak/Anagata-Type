@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.anagata.typingkit.features.ui.detail.DetailActivity"
+            android:name="com.anagata.typingkit.features.ui.detail.activity.DetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anagata.typingkit.features.ui.main.MainActivity"
+            android:name="com.anagata.typingkit.features.ui.main.activity.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

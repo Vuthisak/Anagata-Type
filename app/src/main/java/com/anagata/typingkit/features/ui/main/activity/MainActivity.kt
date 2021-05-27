@@ -1,4 +1,4 @@
-package com.anagata.typingkit.features.ui.main
+package com.anagata.typingkit.features.ui.main.activity
 
 import androidx.fragment.app.Fragment
 import com.anagata.typingkit.base.ContainFragmentActivity

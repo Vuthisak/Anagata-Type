@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anagata.typingkit.R
 import com.anagata.typingkit.base.BaseFragment
 import com.anagata.typingkit.databinding.FragmentMainBinding
-import com.anagata.typingkit.features.ui.detail.DetailActivity
+import com.anagata.typingkit.features.ui.detail.activity.DetailActivity
 import com.anagata.typingkit.features.ui.dialog.SelectionFontSizeDialog
 import com.anagata.typingkit.features.ui.main.adapter.MainAdapter
 
