@@ -1,7 +1,8 @@
 package com.anagata.typingkit.repository.model
 
-data class Font(
-    val title: String?,
-    val size: Int,
-    val content: String
-)
+import java.io.Serializable
+
+class Font : Serializable {
+    val name: String = ""
+    // val styles: ArrayList<FontWeight> = arrayListOf()
+}

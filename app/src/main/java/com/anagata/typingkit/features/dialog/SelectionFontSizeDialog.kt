@@ -8,12 +8,21 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.Window
+import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
+import com.anagata.typingkit.R
 import com.anagata.typingkit.databinding.DialogSelectionFontSizeBinding
+
 
 class SelectionFontSizeDialog : DialogFragment() {
 
     private lateinit var binding: DialogSelectionFontSizeBinding
+    private val fontNames = arrayListOf<String>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initArguments()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,6 +31,11 @@ class SelectionFontSizeDialog : DialogFragment() {
     ): View {
         binding = DialogSelectionFontSizeBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupContents()
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -37,8 +51,33 @@ class SelectionFontSizeDialog : DialogFragment() {
         }
     }
 
+    private fun setupContents() {
+        setupDropDown()
+    }
+
+    private fun setupDropDown() {
+        val type = arrayOf("Bed-sitter", "Single", "1- Bedroom", "2- Bedroom", "3- Bedroom")
+        val adapter = ArrayAdapter(requireContext(), R.layout.item_drop_down, type)
+        binding.sizeAutoCompleteText.setAdapter(adapter)
+    }
+
+    private fun initArguments() {
+        requireArguments().getStringArrayList(ARG_FONT_NAMES)?.run {
+            fontNames.addAll(this)
+        }
+    }
+
     companion object {
         const val TAG = "SelectionFontSizeDialog"
+        private const val ARG_FONT_NAMES = "ArgFontNames"
+
+        fun newInstance(fontNames: ArrayList<String>): SelectionFontSizeDialog {
+            return SelectionFontSizeDialog().apply {
+                val bundle = Bundle()
+                bundle.putStringArrayList(ARG_FONT_NAMES, fontNames)
+                arguments = bundle
+            }
+        }
     }
 
 }

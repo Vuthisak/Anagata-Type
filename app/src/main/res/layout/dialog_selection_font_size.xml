@@ -18,20 +18,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flowDialog"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fontStyleTextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:constraint_referenced_ids="fontStyleSpinner"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/space_16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="@dimen/space_8dp"
+        android:hint="Font Style"
+        app:layout_constraintEnd_toStartOf="@id/sizeTextInputLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleDialogText" />
+        app:layout_constraintTop_toBottomOf="@id/titleDialogText">
 
-    <Spinner
-        android:id="@+id/fontStyleSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/fontStyleTextInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/sizeTextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_16dp"
+        android:hint="Size"
+        app:layout_constraintBottom_toBottomOf="@id/fontStyleTextInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fontStyleTextInputLayout"
+        app:layout_constraintTop_toTopOf="@id/fontStyleTextInputLayout">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/size_auto_complete_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/applyButton"
@@ -45,6 +71,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/flowDialog" />
+        app:layout_constraintTop_toBottomOf="@id/fontStyleTextInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
