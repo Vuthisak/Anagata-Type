@@ -1,9 +1,8 @@
-package com.anagata.typingkit.util.helper
+package com.anagata.typingkit.repository
 
 import com.anagata.typingkit.repository.model.Typeface
 import com.google.firebase.database.FirebaseDatabase
 import java.lang.Exception
-import java.lang.NullPointerException
 
 class FirebaseRepository {
 

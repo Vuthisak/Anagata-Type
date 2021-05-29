@@ -3,17 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/space_120dp"
-    android:background="@color/colorPrimary">
+    android:layout_height="match_parent"
+    tools:context=".features.splash.SplashActivity">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space_24dp"
         android:orientation="vertical"
-        app:constraint_referenced_ids="titleText,subTitleText"
+        app:constraint_referenced_ids="titleText,progressBar"
         app:flow_verticalBias="0.0"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,28 +31,13 @@
         style="@style/ToolbarTitle.TextColorWhite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:text="TestingKit" />
 
-    <TextView
-        android:id="@+id/subTitleText"
-        style="@style/ToolbarSubTitle"
+    <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Niradei + 12pt" />
-
-    <TextView
-        android:id="@+id/styleText"
-        style="@style/ToolbarTitle.ToolbarChooseStyle"
-        android:layout_width="@dimen/space_70dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/space_24dp"
-        android:background="@drawable/white_border_circle"
-        android:focusable="true"
-        android:gravity="center"
-        android:padding="@dimen/space_16dp"
-        android:text="@string/A_a"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:indeterminateTint="@android:color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,10 +7,12 @@ import com.anagata.typingkit.base.BaseRecyclerAdapter
 import com.anagata.typingkit.base.BaseViewHolder
 import com.anagata.typingkit.databinding.ViewItemFontBinding
 import com.anagata.typingkit.repository.model.Font
+import com.anagata.typingkit.repository.model.MockFont
 
 class MainAdapter(
-    private val onItemClickListener: (font: Font) -> Unit
-) : BaseRecyclerAdapter<Font, MainAdapter.MainViewHolder>(arrayListOf()) {
+    private val mockFonts: ArrayList<MockFont>,
+    private val onItemClickListener: (mockFont: MockFont) -> Unit
+) : BaseRecyclerAdapter<MockFont, MainAdapter.MainViewHolder>(mockFonts) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val binding = ViewItemFontBinding.inflate(
@@ -23,12 +25,12 @@ class MainAdapter(
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.binding.run {
+            val item = mockFonts[position]
+            listTitleText.text = item.title ?: ""
             contentContainer.setOnClickListener {
             }
         }
     }
-
-    override fun getItemCount(): Int = 10
 
     class MainViewHolder(
         val binding: ViewItemFontBinding

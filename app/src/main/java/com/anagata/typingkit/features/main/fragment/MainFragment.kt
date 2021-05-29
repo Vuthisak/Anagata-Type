@@ -2,9 +2,7 @@ package com.anagata.typingkit.features.main.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anagata.typingkit.R
@@ -15,16 +13,24 @@ import com.anagata.typingkit.features.dialog.SelectionFontSizeDialog
 import com.anagata.typingkit.features.main.adapter.MainAdapter
 import com.anagata.typingkit.features.main.state.MainState
 import com.anagata.typingkit.features.main.viewmodel.MainViewModel
-import com.anagata.typingkit.util.helper.FirebaseRepository
+import com.anagata.typingkit.repository.model.MockFont
+import com.anagata.typingkit.repository.model.Typeface
+import com.anagata.typingkit.util.getMockFonts
 
 class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private lateinit var vm: MainViewModel
     private lateinit var binding: FragmentMainBinding
+    private var typeface: Typeface? = null
+    private var mockFonts = arrayListOf<MockFont>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vm = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+        vm.getData()
+        getMockFonts(requireContext())?.mockFonts?.apply {
+            mockFonts.addAll(this)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,11 +45,19 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         vm.liveData.observe(requireActivity()) {
             if (it == null) return@observe
             when (it) {
-                is MainState.OnGetTypeFaceSuccess -> showToast(it.typeface.typefaces.size.toString())
+                is MainState.OnGetTypeFaceSuccess -> onGetTypeFaceSuccess(it)
                 is MainState.OnError -> {
                     showToast("Error")
                 }
             }
+        }
+    }
+
+    private fun onGetTypeFaceSuccess(state: MainState.OnGetTypeFaceSuccess) {
+        typeface = state.typeface
+        typeface?.typefaces?.firstOrNull()?.let {
+            val subTitle = "${it.name} + 12pt"
+            binding.viewMainToolbar.subTitleText.text = subTitle
         }
     }
 
@@ -54,7 +68,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     }
 
     private fun showChooseFontSizeDialog() {
-        SelectionFontSizeDialog().show(childFragmentManager, TAG)
+        typeface?.run {
+            SelectionFontSizeDialog.newInstance(fontNames)
+                .show(childFragmentManager, SelectionFontSizeDialog.TAG)
+        }
     }
 
     private fun setupContent() {
@@ -65,7 +82,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     private fun setupRecyclerView() {
         binding.mainRecycler.run {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = MainAdapter {
+            adapter = MainAdapter(mockFonts) {
                 openDetailActivity()
             }
         }

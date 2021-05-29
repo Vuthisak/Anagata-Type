@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@id/titleDialogText">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/fontStyleTextInputEditText"
+            android:id="@+id/fontStyleAutoCompleteText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />

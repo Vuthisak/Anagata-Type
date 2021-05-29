@@ -13,7 +13,6 @@ import androidx.fragment.app.DialogFragment
 import com.anagata.typingkit.R
 import com.anagata.typingkit.databinding.DialogSelectionFontSizeBinding
 
-
 class SelectionFontSizeDialog : DialogFragment() {
 
     private lateinit var binding: DialogSelectionFontSizeBinding
@@ -52,12 +51,16 @@ class SelectionFontSizeDialog : DialogFragment() {
     }
 
     private fun setupContents() {
-        setupDropDown()
+        setupFontStyleDropDown()
     }
 
-    private fun setupDropDown() {
-        val type = arrayOf("Bed-sitter", "Single", "1- Bedroom", "2- Bedroom", "3- Bedroom")
-        val adapter = ArrayAdapter(requireContext(), R.layout.item_drop_down, type)
+    private fun setupFontStyleDropDown() {
+        val adapter = ArrayAdapter(requireContext(), R.layout.item_drop_down, fontNames)
+        binding.fontStyleAutoCompleteText.setAdapter(adapter)
+    }
+
+    private fun setupFontSizeDropDown() {
+        val adapter = ArrayAdapter(requireContext(), R.layout.item_drop_down, fontNames)
         binding.sizeAutoCompleteText.setAdapter(adapter)
     }
 
