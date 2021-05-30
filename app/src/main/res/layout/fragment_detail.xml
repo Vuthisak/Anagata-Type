@@ -10,40 +10,48 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="@dimen/space_16dp"
-        android:text="TestingText"
+        android:text="@string/testingkit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/labelPreviewText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space_16dp"
-        android:layout_marginTop="@dimen/space_24dp"
-        android:text="@string/type_here_to_preview_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detailTitleText" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/previewInputText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/previewTextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/space_16dp"
         android:layout_marginTop="@dimen/space_4dp"
-        app:layout_constraintEnd_toStartOf="@id/sizeSpinner"
+        android:hint="@string/type_here_to_preview_text"
+        app:layout_constraintEnd_toStartOf="@id/sizeTextInputLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelPreviewText" />
+        app:layout_constraintTop_toBottomOf="@+id/detailTitleText">
 
-    <Spinner
-        android:id="@+id/sizeSpinner"
-        android:layout_width="60dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/sizeTextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="@dimen/space_120dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/space_16dp"
-        app:layout_constraintBottom_toBottomOf="@id/previewInputText"
+        android:hint="@string/size"
+        app:layout_constraintBottom_toBottomOf="@id/previewTextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/previewInputText"
-        app:layout_constraintTop_toTopOf="@id/previewInputText" />
+        app:layout_constraintStart_toEndOf="@id/previewTextInputLayout"
+        app:layout_constraintTop_toTopOf="@id/previewTextInputLayout">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/size_auto_complete_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/detailRecycler"
@@ -54,6 +62,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/previewInputText" />
+        app:layout_constraintTop_toBottomOf="@id/previewTextInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

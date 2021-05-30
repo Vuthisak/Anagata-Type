@@ -22,7 +22,7 @@
         style="@style/ToolbarTitle.TextColorWhite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TestingKit" />
+        android:text="@string/testingkit" />
 
     <TextView
         android:id="@+id/subTitleText"
