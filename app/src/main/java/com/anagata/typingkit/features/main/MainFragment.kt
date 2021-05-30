@@ -55,8 +55,9 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     }
 
     private fun registerListener() {
-        binding.refreshButton.setOnClickListener {
-            vm.getData()
+        binding.viewMainToolbar.subTitleText.setOnClickListener {
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            startActivity(intent)
         }
         binding.viewMainToolbar.styleText.setOnClickListener { showChooseFontSizeDialog() }
     }
@@ -91,18 +92,6 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         requireContext().run {
             val intent = Intent(this, DetailActivity::class.java)
             startActivity(intent)
-        }
-    }
-
-    companion object {
-        const val TAG = "MainFragment"
-
-        fun newInstance(typeface: Typeface): MainFragment {
-            return MainFragment().apply {
-                val bundle = Bundle()
-                bundle.putSerializable(SplashActivity.KEY_TYPEFACE, typeface)
-                arguments = bundle
-            }
         }
     }
 
