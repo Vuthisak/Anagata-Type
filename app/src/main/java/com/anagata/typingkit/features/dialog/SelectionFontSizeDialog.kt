@@ -13,10 +13,13 @@ import androidx.fragment.app.DialogFragment
 import com.anagata.typingkit.R
 import com.anagata.typingkit.databinding.DialogSelectionFontSizeBinding
 
+typealias OnClickListener<T> = (T) -> Unit
+
 class SelectionFontSizeDialog : DialogFragment() {
 
     private lateinit var binding: DialogSelectionFontSizeBinding
     private val fontNames = arrayListOf<String>()
+    private var onApplyClickListener: OnClickListener<Pair<String, String>>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +38,7 @@ class SelectionFontSizeDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupContents()
+        registerListener()
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -50,18 +54,40 @@ class SelectionFontSizeDialog : DialogFragment() {
         }
     }
 
+    fun onApplyClickListener(onApplyClickListener: OnClickListener<Pair<String, String>>) {
+        this.onApplyClickListener = onApplyClickListener
+    }
+
+    private fun registerListener() {
+        binding.applyButton.setOnClickListener {
+            val first = binding.fontStyleAutoCompleteText.text.toString()
+            val second = binding.sizeAutoCompleteText.text.toString()
+            this.onApplyClickListener?.invoke(Pair(first, second))
+            dismiss()
+        }
+    }
+
     private fun setupContents() {
         setupFontStyleDropDown()
+        setupFontSizeDropDown()
     }
 
     private fun setupFontStyleDropDown() {
         val adapter = ArrayAdapter(requireContext(), R.layout.item_drop_down, fontNames)
-        binding.fontStyleAutoCompleteText.setAdapter(adapter)
+        binding.fontStyleAutoCompleteText.run {
+            setAdapter(adapter)
+            setText(adapter.getItem(0), false)
+        }
     }
 
     private fun setupFontSizeDropDown() {
-        val adapter = ArrayAdapter(requireContext(), R.layout.item_drop_down, fontNames)
-        binding.sizeAutoCompleteText.setAdapter(adapter)
+        val sizes = requireContext().resources.getStringArray(R.array.sizes)
+        val adapter = ArrayAdapter(requireContext(), R.layout.item_drop_down, sizes)
+        binding.sizeAutoCompleteText.run {
+            setAdapter(adapter)
+            setText(adapter.getItem(0), false)
+        }
+
     }
 
     private fun initArguments() {

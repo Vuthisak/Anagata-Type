@@ -26,9 +26,11 @@
 
     <TextView
         android:id="@+id/subTitleText"
-        style="@style/ToolbarSubTitle"
+        style="@style/ToolbarSubTitle.Clickable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/space_16dp"
+        android:paddingVertical="@dimen/space_8dp"
         tools:text="Niradei + 12pt" />
 
     <TextView

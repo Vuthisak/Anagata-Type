@@ -1,12 +1,10 @@
-package com.anagata.typingkit.features.main.adapter
+package com.anagata.typingkit.features.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.anagata.typingkit.base.BaseRecyclerAdapter
 import com.anagata.typingkit.base.BaseViewHolder
 import com.anagata.typingkit.databinding.ViewItemFontBinding
-import com.anagata.typingkit.repository.model.Font
 import com.anagata.typingkit.repository.model.MockFont
 
 class MainAdapter(

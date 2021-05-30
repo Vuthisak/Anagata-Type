@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/titleDialogText"
+        style="@style/ToolbarTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/space_8dp"
         android:layout_marginStart="@dimen/space_16dp"
-        android:text="Choose Font And Size"
-        android:textColor="@color/grey1"
-        android:textSize="@dimen/size_24sp"
+        android:layout_marginTop="@dimen/space_8dp"
+        android:text="@string/choose_font_and_size"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +25,7 @@
         android:layout_marginStart="@dimen/space_16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="@dimen/space_8dp"
-        android:hint="Font Style"
+        android:hint="@string/font_style"
         app:layout_constraintEnd_toStartOf="@id/sizeTextInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleDialogText">
@@ -45,7 +44,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/space_16dp"
-        android:hint="Size"
+        android:hint="@string/size"
         app:layout_constraintBottom_toBottomOf="@id/fontStyleTextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/fontStyleTextInputLayout"
@@ -63,14 +62,12 @@
         android:id="@+id/applyButton"
         style="@style/Button.Primary"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/space_24dp"
-        android:layout_marginTop="@dimen/space_16dp"
+        android:layout_marginTop="@dimen/space_24dp"
         android:layout_marginBottom="@dimen/space_16dp"
         android:text="@string/apply"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/sizeTextInputLayout"
+        app:layout_constraintStart_toStartOf="@id/fontStyleTextInputLayout"
         app:layout_constraintTop_toBottomOf="@id/fontStyleTextInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

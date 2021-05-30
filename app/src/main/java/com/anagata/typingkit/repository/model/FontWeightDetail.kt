@@ -2,7 +2,8 @@ package com.anagata.typingkit.repository.model
 
 import java.io.Serializable
 
-class Font : Serializable {
+class FontWeightDetail : Serializable {
     val name: String = ""
-    val styles: Style? = null
+    val src: String = ""
+    val weight: String = ""
 }

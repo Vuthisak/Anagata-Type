@@ -21,10 +21,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".features.detail.activity.DetailActivity"
+            android:name=".features.detail.DetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".features.main.activity.MainActivity"
+            android:name=".features.main.MainActivity"
             android:screenOrientation="portrait" />
     </application>
 

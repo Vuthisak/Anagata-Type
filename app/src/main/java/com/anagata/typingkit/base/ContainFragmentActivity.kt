@@ -18,16 +18,16 @@ abstract class ContainFragmentActivity : AppCompatActivity() {
         addFragment(fragment)
     }
 
-    private fun setupBinding() {
-        binding = ActivityContainerFragmentBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-    }
-
-    private fun addFragment(fragment: Fragment) {
+    open fun addFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragmentContainer, fragment)
             .commit()
+    }
+
+    private fun setupBinding() {
+        binding = ActivityContainerFragmentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
 }

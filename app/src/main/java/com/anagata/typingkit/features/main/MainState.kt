@@ -1,4 +1,4 @@
-package com.anagata.typingkit.features.main.state
+package com.anagata.typingkit.features.main
 
 import com.anagata.typingkit.repository.model.Typeface
 

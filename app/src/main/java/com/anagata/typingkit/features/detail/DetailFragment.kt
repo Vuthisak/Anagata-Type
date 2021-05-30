@@ -1,4 +1,4 @@
-package com.anagata.typingkit.features.detail.fragment
+package com.anagata.typingkit.features.detail
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anagata.typingkit.R
 import com.anagata.typingkit.base.BaseFragment
 import com.anagata.typingkit.databinding.FragmentDetailBinding
-import com.anagata.typingkit.features.detail.adapter.DetailAdapter
 
 class DetailFragment : BaseFragment(R.layout.fragment_detail) {
 

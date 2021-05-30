@@ -1,8 +1,8 @@
-package com.anagata.typingkit.features.main.viewmodel
+package com.anagata.typingkit.features.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.anagata.typingkit.features.main.state.MainState
+import com.anagata.typingkit.features.main.MainState
 import com.anagata.typingkit.repository.FirebaseRepository
 
 class MainViewModel(
