@@ -5,13 +5,14 @@ import java.io.Serializable
 class Typeface : Serializable {
     val typefaces: ArrayList<Font> = arrayListOf()
 
-    val fontNames: ArrayList<String>
-        get() {
+    companion object {
+        fun getFontNames(fonts: List<Font>): ArrayList<String> {
             val strings = arrayListOf<String>()
-            typefaces.forEach {
+            fonts.forEach {
                 strings.add(it.name)
             }
             return strings
         }
+    }
 
 }

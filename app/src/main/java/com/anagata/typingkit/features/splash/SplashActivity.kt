@@ -8,12 +8,11 @@ import com.anagata.typingkit.R
 import com.anagata.typingkit.features.main.MainActivity
 import com.anagata.typingkit.features.main.MainState
 import com.anagata.typingkit.repository.model.Typeface
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashActivity : AppCompatActivity() {
 
-    private val vm: SplashViewModel by lazy {
-        ViewModelProvider(this)[SplashViewModel::class.java]
-    }
+    private val vm: SplashViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,21 +21,18 @@ class SplashActivity : AppCompatActivity() {
         registerObserver()
     }
 
-    private fun openMain(typeface: Typeface? = null) {
-        val i = Intent(this@SplashActivity, MainActivity::class.java)
-        typeface?.let { i.putExtra(KEY_TYPEFACE, typeface) }
-        startActivity(i)
-        finish()
-    }
-
     private fun registerObserver() {
         vm.liveData.observe(this, {
             when (it) {
-                is MainState.OnGetTypeFaceSuccess -> {
-                    openMain(it.typeface)
-                }
+                is SplashState.DOWNLOADED, SplashState.FAILED -> openMain()
             }
         })
+    }
+
+    private fun openMain() {
+        val i = Intent(this@SplashActivity, MainActivity::class.java)
+        startActivity(i)
+        finish()
     }
 
     companion object {

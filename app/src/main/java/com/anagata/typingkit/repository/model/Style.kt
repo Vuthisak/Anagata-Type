@@ -1,11 +1,16 @@
 package com.anagata.typingkit.repository.model
 
+import com.anagata.typingkit.repository.entity.StyleEntity
 import java.io.Serializable
 
 class Style : Serializable {
-    val w300: FontWeightDetail? = null
+    var w300: FontWeight? = null
 
-    val w400: FontWeightDetail? = null
+    var w400: FontWeight? = null
 
-    val w700: FontWeightDetail? = null
+    var w700: FontWeight? = null
+
+    val entity: StyleEntity
+        get() = StyleEntity(w300?.entity, w400?.entity, w700?.entity)
+
 }
