@@ -16,11 +16,7 @@ class MainViewModel(
 
     fun getFonts() {
         firebaseRepository.getAllFontsFromDb {
-            if (it.isEmpty()) {
-                getFonts()
-            } else {
-                liveData.postValue(MainState.OnGetTypeFaceSuccess(it))
-            }
+            liveData.postValue(MainState.OnGetTypeFaceSuccess(it))
         }
     }
 

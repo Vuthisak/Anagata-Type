@@ -85,7 +85,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     private fun setupContent(fonts: List<Font>) {
         binding.run {
             fonts.firstOrNull()?.let {
-                val subTitle = "${it.name} + 12pt"
+                val subTitle = "${it.name} + 16 pt"
                 viewMainToolbar.subTitleText.text = subTitle
                 setupRecyclerView(it.styles?.w400)
             }

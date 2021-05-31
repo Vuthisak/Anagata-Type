@@ -17,9 +17,9 @@ class SplashViewModel(
 
     fun getData() {
         firebaseRepository.initData({
-            liveData.value = SplashState.DOWNLOADED
+            liveData.postValue(SplashState.DOWNLOADED)
         }, {
-            liveData.value = SplashState.FAILED
+            liveData.postValue(SplashState.FAILED)
         })
     }
 

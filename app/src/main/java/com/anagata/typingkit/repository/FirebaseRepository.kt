@@ -31,9 +31,9 @@ class FirebaseRepository(
             data.getValue(Typeface::class.java)?.run {
                 CoroutineScope(Dispatchers.IO).launch {
                     typefaces.forEach { checkFont(it) }
+                    onCompleteListener()
                 }
             }
-            onCompleteListener()
         }?.addOnFailureListener {
             onFailureListener(it)
         }
