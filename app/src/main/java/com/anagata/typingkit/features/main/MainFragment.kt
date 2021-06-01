@@ -23,6 +23,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     private lateinit var binding: FragmentMainBinding
     private var mockFonts = arrayListOf<MockFont>()
     private var fonts = listOf<Font>()
+    private lateinit var currentFont: Font
     private var fontSelected: FontSelected? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +36,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     override fun onAttachFragment(fragment: Fragment) {
         if (fragment is SelectionFontSizeDialog) {
             fragment.onApplyClickListener {
+                currentFont = fonts[it.fontIndex]
                 fontSelected = it
                 binding.viewMainToolbar.subTitleText.text = it.fontStyle
                 setupRecyclerView(it.location, it.fontSize)
@@ -55,17 +57,15 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
                 is MainState.OnGetTypeFaceSuccess -> {
                     this.fonts = it.fonts
                     setupContent(it.fonts)
-                    registerListener(it.fonts)
-                    binding.progressBar.visibility = View.GONE
+                    registerListener()
                 }
             }
         }
     }
 
-    private fun registerListener(fonts: List<Font>) {
+    private fun registerListener() {
         binding.viewMainToolbar.subTitleText.setOnClickListener {
-            val intent = Intent(requireContext(), DetailActivity::class.java)
-            startActivity(intent)
+            DetailActivity.start(requireContext(), currentFont)
         }
         binding.viewMainToolbar.styleText.setOnClickListener { showChooseFontSizeDialog() }
     }
@@ -79,11 +79,13 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     private fun setupContent(fonts: List<Font>) {
         binding.run {
             fonts.firstOrNull()?.let {
+                currentFont = it
                 it.styles.firstOrNull()?.let { style ->
                     val subTitle = "${it.name} ${style.name} + ${defaultSize.toInt()} pt"
                     viewMainToolbar.subTitleText.text = subTitle
                     setupRecyclerView(style.location)
                 }
+                progressBar.visibility = View.GONE
             }
         }
     }
@@ -91,16 +93,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     private fun setupRecyclerView(fontLocation: String?, fontSize: Float = defaultSize) {
         binding.mainRecycler.run {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = MainAdapter(fontSize, fontLocation, mockFonts) {
-                openDetailActivity()
-            }
-        }
-    }
-
-    private fun openDetailActivity() {
-        requireContext().run {
-            val intent = Intent(this, DetailActivity::class.java)
-            startActivity(intent)
+            adapter = MainAdapter(fontSize, fontLocation, mockFonts)
         }
     }
 

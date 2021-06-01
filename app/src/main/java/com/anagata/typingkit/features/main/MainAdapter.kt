@@ -15,8 +15,7 @@ import java.io.File
 class MainAdapter(
     private val fontSize: Float,
     private val fontLocation: String?,
-    private val mockFonts: ArrayList<MockFont>,
-    private val onItemClickListener: (mockFont: MockFont) -> Unit
+    private val mockFonts: ArrayList<MockFont>
 ) : BaseRecyclerAdapter<MockFont, MainAdapter.MainViewHolder>(mockFonts) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -32,8 +31,7 @@ class MainAdapter(
         holder.binding.run {
             val item = mockFonts[position]
             fontLocation?.let {
-                val typeface = Typeface.createFromFile(File(it))
-                contentText.typeface = typeface
+                contentText.typeface = Typeface.createFromFile(File(it))
                 contentText.setTextSize(TypedValue.COMPLEX_UNIT_PT, fontSize)
             }
             listTitleText.text = item.title.getDefaultValue()

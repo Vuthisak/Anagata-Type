@@ -20,4 +20,14 @@ data class FontSelected(
             return defaultSize
         }
 
+    companion object {
+        fun getFontSize(fontSize: String): Float {
+            val split = fontSize.split(" ")
+            if (split.size > 1) {
+                return split[0].toFloat()
+            }
+            return defaultSize
+        }
+    }
+
 }
