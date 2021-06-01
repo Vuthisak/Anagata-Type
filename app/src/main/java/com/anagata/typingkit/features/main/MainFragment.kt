@@ -11,13 +11,10 @@ import com.anagata.typingkit.databinding.FragmentMainBinding
 import com.anagata.typingkit.features.detail.DetailActivity
 import com.anagata.typingkit.features.dialog.SelectionFontSizeDialog
 import com.anagata.typingkit.repository.model.Font
-import com.anagata.typingkit.repository.model.FontWeight
+import com.anagata.typingkit.repository.model.FontSelected
 import com.anagata.typingkit.repository.model.MockFont
-import com.anagata.typingkit.repository.model.Typeface
+import com.anagata.typingkit.util.defaultSize
 import com.anagata.typingkit.util.getMockFonts
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : BaseFragment(R.layout.fragment_main) {
@@ -26,7 +23,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     private lateinit var binding: FragmentMainBinding
     private var mockFonts = arrayListOf<MockFont>()
     private var fonts = listOf<Font>()
-    private var defaultPos: Int = 0
+    private var fontSelected: FontSelected? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,13 +35,9 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     override fun onAttachFragment(fragment: Fragment) {
         if (fragment is SelectionFontSizeDialog) {
             fragment.onApplyClickListener {
-                if (fonts.isNotEmpty()) {
-                    defaultPos = it.first
-                    val font = fonts[it.first]
-                    val subTitle = "${font.name} + 16 pt"
-                    binding.viewMainToolbar.subTitleText.text = subTitle
-                    setupRecyclerView(font.styles?.w400)
-                }
+                fontSelected = it
+                binding.viewMainToolbar.subTitleText.text = it.fontStyle
+                setupRecyclerView(it.location, it.fontSize)
             }
         }
     }
@@ -74,28 +67,31 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             val intent = Intent(requireContext(), DetailActivity::class.java)
             startActivity(intent)
         }
-        binding.viewMainToolbar.styleText.setOnClickListener { showChooseFontSizeDialog(fonts) }
+        binding.viewMainToolbar.styleText.setOnClickListener { showChooseFontSizeDialog() }
     }
 
-    private fun showChooseFontSizeDialog(fonts: List<Font>) {
-        SelectionFontSizeDialog.newInstance(Typeface.getFontNames(fonts), defaultPos)
+    private fun showChooseFontSizeDialog() {
+        SelectionFontSizeDialog
+            .newInstance(fontSelected)
             .show(childFragmentManager, SelectionFontSizeDialog.TAG)
     }
 
     private fun setupContent(fonts: List<Font>) {
         binding.run {
             fonts.firstOrNull()?.let {
-                val subTitle = "${it.name} + 16 pt"
-                viewMainToolbar.subTitleText.text = subTitle
-                setupRecyclerView(it.styles?.w400)
+                it.styles.firstOrNull()?.let { style ->
+                    val subTitle = "${it.name} ${style.name} + ${defaultSize.toInt()} pt"
+                    viewMainToolbar.subTitleText.text = subTitle
+                    setupRecyclerView(style.location)
+                }
             }
         }
     }
 
-    private fun setupRecyclerView(fontWeight: FontWeight?) {
+    private fun setupRecyclerView(fontLocation: String?, fontSize: Float = defaultSize) {
         binding.mainRecycler.run {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = MainAdapter(fontWeight, mockFonts) {
+            adapter = MainAdapter(fontSize, fontLocation, mockFonts) {
                 openDetailActivity()
             }
         }

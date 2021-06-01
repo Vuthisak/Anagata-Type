@@ -8,6 +8,8 @@ import java.nio.charset.Charset
 
 val gson = Gson()
 
+val defaultSize = 10f
+
 fun getMockFonts(context: Context): MockFontWrapper? {
     return try {
         val inputStream = context.assets.open("MockData.json")

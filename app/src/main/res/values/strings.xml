@@ -10,11 +10,10 @@
     <string name="font_style">Font Style</string>
     <string name="testingkit">TestingKit</string>
     <string-array name="sizes">
+        <item>10 pt</item>
         <item>16 pt</item>
-        <item>20 pt</item>
-        <item>24 pt</item>
+        <item>22 pt</item>
         <item>28 pt</item>
-        <item>32 pt</item>
-        <item>36 pt</item>
+        <item>34 pt</item>
     </string-array>
 </resources>

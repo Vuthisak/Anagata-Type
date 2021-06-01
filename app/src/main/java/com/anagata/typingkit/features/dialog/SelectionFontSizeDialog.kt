@@ -12,15 +12,22 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import com.anagata.typingkit.R
 import com.anagata.typingkit.databinding.DialogSelectionFontSizeBinding
+import com.anagata.typingkit.features.main.MainState
+import com.anagata.typingkit.features.main.MainViewModel
+import com.anagata.typingkit.repository.model.FontSelected
+import com.anagata.typingkit.repository.model.Typeface
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 typealias OnClickListener<T> = (T) -> Unit
 
 class SelectionFontSizeDialog : DialogFragment() {
 
+    private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: DialogSelectionFontSizeBinding
     private val fontNames = arrayListOf<String>()
-    private var defaultPos: Int = 0
-    private var onApplyClickListener: OnClickListener<Pair<Int, String>>? = null
+    private var fonts = arrayListOf<Pair<String, String>>()
+    private var fontSelected = FontSelected("", "", 0, 0, "")
+    private var onApplyClickListener: OnClickListener<FontSelected>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +45,8 @@ class SelectionFontSizeDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupContents()
-        registerListener()
+        registerObserver()
+        viewModel.getFonts()
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -55,29 +62,52 @@ class SelectionFontSizeDialog : DialogFragment() {
         }
     }
 
-    fun onApplyClickListener(onApplyClickListener: OnClickListener<Pair<Int, String>>) {
+    fun onApplyClickListener(onApplyClickListener: OnClickListener<FontSelected>) {
         this.onApplyClickListener = onApplyClickListener
+    }
+
+    private fun registerObserver() {
+        viewModel.liveData.observe(requireActivity()) {
+            when (it) {
+                is MainState.OnGetTypeFaceSuccess -> {
+                    fonts = Typeface.getFontNames(it.fonts)
+                    setupContents(fonts)
+                }
+            }
+        }
+    }
+
+    private fun setupContents(fonts: ArrayList<Pair<String, String>>) {
+        setupFontStyleDropDown(fonts)
+        setupFontSizeDropDown()
+        registerListener()
     }
 
     private fun registerListener() {
         binding.applyButton.setOnClickListener {
             val first = binding.fontStyleAutoCompleteText.text.toString()
             val second = binding.sizeAutoCompleteText.text.toString()
-            this.onApplyClickListener?.invoke(Pair(fontNames.indexOf(first), second))
+            val fontIndex = fontNames.indexOf(first)
+            val fontSizeIndex = resources.getStringArray(R.array.sizes).indexOf(second)
+            fontSelected =
+                FontSelected(
+                    "$first + $second",
+                    second,
+                    fontIndex,
+                    fontSizeIndex,
+                    fonts[fontIndex].second
+                )
+            this.onApplyClickListener?.invoke(fontSelected)
             dismiss()
         }
     }
 
-    private fun setupContents() {
-        setupFontStyleDropDown()
-        setupFontSizeDropDown()
-    }
-
-    private fun setupFontStyleDropDown() {
+    private fun setupFontStyleDropDown(fonts: ArrayList<Pair<String, String>>) {
+        fonts.forEach { fontNames.add(it.first) }
         val adapter = ArrayAdapter(requireContext(), R.layout.item_drop_down, fontNames)
         binding.fontStyleAutoCompleteText.run {
             setAdapter(adapter)
-            setText(adapter.getItem(defaultPos), false)
+            setText(adapter.getItem(fontSelected.fontIndex), false)
         }
     }
 
@@ -86,35 +116,29 @@ class SelectionFontSizeDialog : DialogFragment() {
         val adapter = ArrayAdapter(requireContext(), R.layout.item_drop_down, sizes)
         binding.sizeAutoCompleteText.run {
             setAdapter(adapter)
-            setText(adapter.getItem(0), false)
+            setText(adapter.getItem(fontSelected.fontSizeIndex), false)
         }
 
     }
 
     private fun initArguments() {
         requireArguments().run {
-            getStringArrayList(ARG_FONT_NAMES)?.run {
-                fontNames.addAll(this)
-            }
-            getInt(ARG_DEFAULT_POS).run {
-                defaultPos = this
+            getSerializable(ARG_FONT_SELECTED)?.run {
+                if (this is FontSelected) {
+                    fontSelected = this
+                }
             }
         }
     }
 
     companion object {
         const val TAG = "SelectionFontSizeDialog"
-        private const val ARG_FONT_NAMES = "ArgFontNames"
-        private const val ARG_DEFAULT_POS = "ArgDefaultPos"
+        private const val ARG_FONT_SELECTED = "fontSelectedArg"
 
-        fun newInstance(
-            fontNames: ArrayList<String>,
-            defaultPos: Int = 0
-        ): SelectionFontSizeDialog {
+        fun newInstance(fontSelected: FontSelected?): SelectionFontSizeDialog {
             return SelectionFontSizeDialog().apply {
                 val bundle = Bundle()
-                bundle.putStringArrayList(ARG_FONT_NAMES, fontNames)
-                bundle.putInt(ARG_DEFAULT_POS, defaultPos)
+                bundle.putSerializable(ARG_FONT_SELECTED, fontSelected)
                 arguments = bundle
             }
         }

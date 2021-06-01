@@ -5,8 +5,8 @@ import java.io.Serializable
 
 class Font : Serializable {
     var name: String = ""
-    var styles: Style? = null
+    var styles = listOf<Style>()
 
     val entity: FontEntity
-        get() = FontEntity(name, styles?.entity)
+        get() = FontEntity(name, FontEntity.listToJson(styles))
 }

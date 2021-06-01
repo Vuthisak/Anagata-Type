@@ -1,29 +1,32 @@
 package com.anagata.typingkit.repository.entity
 
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.RoomWarnings
 import com.anagata.typingkit.repository.model.Font
-import java.util.*
-import kotlin.collections.ArrayList
+import com.anagata.typingkit.repository.model.Style
+import com.google.gson.Gson
 
 @Entity
 data class FontEntity(
     val name: String,
-    @Embedded val styles: StyleEntity? = null,
+    val styles: String,
     @PrimaryKey(autoGenerate = true)
     val fontId: Long = 0
 ) {
-
     fun getModel(): Font {
         val font = Font()
         font.name = name
-        font.styles = styles?.getModel()
+        font.styles = jsonToList(styles)
         return font
     }
 
     companion object {
+        private val gson = Gson()
+
+        fun listToJson(styles: List<Style>): String = gson.toJson(styles)
+        fun jsonToList(jsonStyle: String) =
+            gson.fromJson(jsonStyle, Array<Style>::class.java).toList()
+
         fun translateFontList(fontEntities: List<FontEntity>): List<Font> {
             val fonts = arrayListOf<Font>()
             fontEntities.forEach {
