@@ -36,7 +36,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     override fun onAttachFragment(fragment: Fragment) {
         if (fragment is SelectionFontSizeDialog) {
             fragment.onApplyClickListener {
-                currentFont = fonts[it.fontIndex]
+                it.font?.run { currentFont = this }
                 fontSelected = it
                 binding.viewMainToolbar.subTitleText.text = it.fontStyle
                 setupRecyclerView(it.location, it.fontSize)
@@ -67,9 +67,11 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         binding.run {
             viewMainToolbar.run {
                 subTitleText.setOnClickListener {
+                    showChooseFontSizeDialog()
+                }
+                styleText.setOnClickListener {
                     DetailActivity.start(requireContext(), currentFont)
                 }
-                styleText.setOnClickListener { showChooseFontSizeDialog() }
             }
             refreshButton.setOnClickListener {
                 mainRecycler.scrollToPosition(0)

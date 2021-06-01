@@ -10,10 +10,12 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.Window
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
+import androidx.room.Index
 import com.anagata.typingkit.R
 import com.anagata.typingkit.databinding.DialogSelectionFontSizeBinding
 import com.anagata.typingkit.features.main.MainState
 import com.anagata.typingkit.features.main.MainViewModel
+import com.anagata.typingkit.repository.model.Font
 import com.anagata.typingkit.repository.model.FontSelected
 import com.anagata.typingkit.repository.model.Typeface
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,7 +27,8 @@ class SelectionFontSizeDialog : DialogFragment() {
     private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: DialogSelectionFontSizeBinding
     private val fontNames = arrayListOf<String>()
-    private var fonts = arrayListOf<Pair<String, String>>()
+    private var fonts = arrayListOf<Font>()
+    private var fontStyles = arrayListOf<Triple<String, String, Int>>()
     private var fontSelected = FontSelected("", "", 0, 0, "")
     private var onApplyClickListener: OnClickListener<FontSelected>? = null
 
@@ -70,15 +73,16 @@ class SelectionFontSizeDialog : DialogFragment() {
         viewModel.liveData.observe(requireActivity()) {
             when (it) {
                 is MainState.OnGetTypeFaceSuccess -> {
-                    fonts = Typeface.getFontNames(it.fonts)
-                    setupContents(fonts)
+                    fonts.addAll(it.fonts)
+                    fontStyles = Typeface.getFontNames(fonts)
+                    setupContents()
                 }
             }
         }
     }
 
-    private fun setupContents(fonts: ArrayList<Pair<String, String>>) {
-        setupFontStyleDropDown(fonts)
+    private fun setupContents() {
+        setupFontStyleDropDown()
         setupFontSizeDropDown()
         registerListener()
     }
@@ -89,21 +93,25 @@ class SelectionFontSizeDialog : DialogFragment() {
             val second = binding.sizeAutoCompleteText.text.toString()
             val fontIndex = fontNames.indexOf(first)
             val fontSizeIndex = resources.getStringArray(R.array.sizes).indexOf(second)
+            val fontStyle = fontStyles[fontIndex]
             fontSelected =
                 FontSelected(
                     "$first + $second",
                     second,
                     fontIndex,
                     fontSizeIndex,
-                    fonts[fontIndex].second
+                    fontStyle.second,
+                    fonts[fontStyle.third]
                 )
             this.onApplyClickListener?.invoke(fontSelected)
             dismiss()
         }
     }
 
-    private fun setupFontStyleDropDown(fonts: ArrayList<Pair<String, String>>) {
-        fonts.forEach { fontNames.add(it.first) }
+    private fun setupFontStyleDropDown() {
+        fontStyles.forEach {
+            fontNames.add(it.first)
+        }
         val adapter = ArrayAdapter(requireContext(), R.layout.item_drop_down, fontNames)
         binding.fontStyleAutoCompleteText.run {
             setAdapter(adapter)

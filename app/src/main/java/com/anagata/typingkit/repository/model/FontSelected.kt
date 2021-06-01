@@ -8,7 +8,8 @@ data class FontSelected(
     private val _fontSize: String,
     val fontIndex: Int,
     val fontSizeIndex: Int,
-    val location: String
+    val location: String,
+    val font: Font? = null,
 ) : Serializable {
 
     val fontSize: Float
