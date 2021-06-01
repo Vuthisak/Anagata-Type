@@ -64,10 +64,17 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     }
 
     private fun registerListener() {
-        binding.viewMainToolbar.subTitleText.setOnClickListener {
-            DetailActivity.start(requireContext(), currentFont)
+        binding.run {
+            viewMainToolbar.run {
+                subTitleText.setOnClickListener {
+                    DetailActivity.start(requireContext(), currentFont)
+                }
+                styleText.setOnClickListener { showChooseFontSizeDialog() }
+            }
+            refreshButton.setOnClickListener {
+                mainRecycler.scrollToPosition(0)
+            }
         }
-        binding.viewMainToolbar.styleText.setOnClickListener { showChooseFontSizeDialog() }
     }
 
     private fun showChooseFontSizeDialog() {
