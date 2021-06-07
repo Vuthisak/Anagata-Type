@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anagata.typingkit.repository.model.Font
 
 abstract class BaseRecyclerAdapter<T, VH : BaseViewHolder>(
-    private val items: ArrayList<T>
+    val items: ArrayList<T>
 ) : RecyclerView.Adapter<VH>() {
 
     override fun getItemCount() = items.size

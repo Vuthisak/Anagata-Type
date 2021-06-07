@@ -73,4 +73,7 @@ dependencies {
     // coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
 
+    // flexbox layout
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
 }
