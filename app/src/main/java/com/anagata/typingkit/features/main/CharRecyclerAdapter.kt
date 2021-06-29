@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import com.anagata.typingkit.base.BaseRecyclerAdapter
 import com.anagata.typingkit.base.BaseViewHolder
 import com.anagata.typingkit.databinding.ViewItemChartBinding
+import com.anagata.typingkit.util.defaultSize
 import java.io.File
 
 class CharRecyclerAdapter(
     chars: CharArray,
-    private val fontSize: Float,
     private val fontLocation: String?,
 ) : BaseRecyclerAdapter<Char, CharRecyclerAdapter.ViewHolder>(chars.toList() as ArrayList<Char>) {
 
@@ -26,7 +26,7 @@ class CharRecyclerAdapter(
         holder.binding.root.run {
             fontLocation?.let {
                 typeface = Typeface.createFromFile(File(it))
-                setTextSize(TypedValue.COMPLEX_UNIT_PT, fontSize)
+                setTextSize(TypedValue.COMPLEX_UNIT_PT, defaultSize)
             }
             text = items[position].toString()
         }

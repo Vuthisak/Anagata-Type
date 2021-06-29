@@ -6,31 +6,32 @@
     android:layout_height="@dimen/space_120dp"
     android:background="@color/colorPrimary">
 
-    <androidx.constraintlayout.helper.widget.Flow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space_24dp"
-        android:orientation="vertical"
-        app:constraint_referenced_ids="titleText,subTitleText"
-        app:flow_verticalBias="0.0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/titleText"
         style="@style/ToolbarTitle.TextColorWhite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/testingkit" />
+        android:layout_marginStart="@dimen/space_24dp"
+        android:text="@string/testingkit"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toTopOf="@id/subTitleText"
+        app:layout_constraintEnd_toStartOf="@id/styleText"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/subTitleText"
         style="@style/ToolbarSubTitle.Clickable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/space_16dp"
-        android:paddingVertical="@dimen/space_8dp"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/titleText"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/titleText"
+        app:layout_constraintTop_toBottomOf="@id/titleText"
         tools:text="Niradei + 12pt" />
 
     <TextView

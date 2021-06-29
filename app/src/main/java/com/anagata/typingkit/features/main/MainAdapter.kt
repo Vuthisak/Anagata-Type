@@ -47,7 +47,7 @@ class MainAdapter(
                     justifyContent = JustifyContent.CENTER
                 }
                 recyclerView.layoutManager = layoutManager
-                recyclerView.adapter = CharRecyclerAdapter(chars, fontSize, fontLocation)
+                recyclerView.adapter = CharRecyclerAdapter(chars, fontLocation)
                 contentText.gone()
                 recyclerView.visible()
             } else {
