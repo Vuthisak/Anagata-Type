@@ -1,10 +1,8 @@
 package com.anagata.typingkit.features.main
 
-import android.app.Activity
 import android.graphics.Typeface
 import android.util.TypedValue
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.anagata.typingkit.base.BaseRecyclerAdapter
 import com.anagata.typingkit.base.BaseViewHolder
@@ -13,10 +11,7 @@ import com.anagata.typingkit.repository.model.MockFont
 import com.anagata.typingkit.util.getDefaultValue
 import com.anagata.typingkit.util.gone
 import com.anagata.typingkit.util.visible
-import com.google.android.flexbox.AlignItems
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.*
 import java.io.File
 
 class MainAdapter(
@@ -40,11 +35,17 @@ class MainAdapter(
             val item = mockFonts[position]
             listTitleText.text = item.title.getDefaultValue()
             if (position == 0) {
-                val chars = item.content.replace(" ", "").replace("\n", "").toCharArray()
+                val chars = item.content
+                    .replace(" ", "")
+                    .replace("\n", "")
+                    .toCharArray()
                 val layoutManager = FlexboxLayoutManager(context)
-                layoutManager.flexWrap = FlexWrap.WRAP
-                layoutManager.flexDirection = FlexDirection.ROW
-                layoutManager.alignItems = AlignItems.STRETCH
+                layoutManager.run {
+                    flexWrap = FlexWrap.WRAP
+                    flexDirection = FlexDirection.ROW
+                    alignItems = AlignItems.CENTER
+                    justifyContent = JustifyContent.CENTER
+                }
                 recyclerView.layoutManager = layoutManager
                 recyclerView.adapter = CharRecyclerAdapter(chars, fontSize, fontLocation)
                 contentText.gone()

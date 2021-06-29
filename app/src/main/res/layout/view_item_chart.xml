@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/space_1dp"
     android:background="@drawable/border_ractangle"
+    android:gravity="center"
     android:paddingHorizontal="@dimen/space_16dp"
     android:paddingVertical="@dimen/space_8dp"
     android:text="A" />

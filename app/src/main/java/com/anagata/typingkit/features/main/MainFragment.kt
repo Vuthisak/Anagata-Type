@@ -39,7 +39,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
                 it.font?.run { currentFont = this }
                 fontSelected = it
                 binding.viewMainToolbar.subTitleText.text = it.fontStyle
-                setupRecyclerView(it.location, it.fontSize)
+                setupRecyclerView(it.location)
             }
         }
     }
